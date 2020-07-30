@@ -1,4 +1,4 @@
-package internal
+package temp
 
 import (
 	"crypto/ed25519"

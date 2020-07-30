@@ -9,7 +9,7 @@ import (
 
 	"github.com/oasisprotocol/oasis-core/go/common/crypto/signature"
 
-	"github.com/oasisprotocol/oasis-core-ledger/internal"
+	"github.com/oasisprotocol/oasis-core-ledger/temp"
 )
 
 var (
@@ -27,7 +27,7 @@ var (
 	// signerEntityDerivationRootPath is the BIP-0032 path prefix used for generating
 	// an Entity signer.
 	signerEntityDerivationRootPath = []uint32{
-		internal.PathPurposeBIP44,
+		temp.PathPurposeBIP44,
 		signerPathCoinType,
 		signerPathAccount,
 		signerPathChange,
@@ -35,9 +35,9 @@ var (
 	// signerConsensusDerivationRootPath is the derivation path prefix used for
 	// generating a consensus signer.
 	signerConsensusDerivationRootPath = []uint32{
-		internal.PathPurposeConsensus,
+		temp.PathPurposeConsensus,
 		signerPathCoinType,
-		internal.PathSubPurposeConsensus,
+		temp.PathSubPurposeConsensus,
 		signerPathAccount,
 	}
 
@@ -147,7 +147,7 @@ func (fac *ledgerFactory) Load(role signature.SignerRole) (signature.Signer, err
 		return nil, fmt.Errorf("ledger: role %d is not supported when using the Ledger backed signer", role)
 	}
 	path := append(pathPrefix, fac.index)
-	device, err := internal.ConnectLedgerOasisApp(fac.address, path)
+	device, err := temp.ConnectLedgerOasisApp(fac.address, path)
 	if err != nil {
 		return nil, fmt.Errorf("ledger: failed to connect to device: %w", err)
 	}
@@ -156,7 +156,7 @@ func (fac *ledgerFactory) Load(role signature.SignerRole) (signature.Signer, err
 }
 
 type ledgerSigner struct {
-	device    *internal.LedgerOasis
+	device    *temp.LedgerOasis
 	path      []uint32
 	publicKey *signature.PublicKey
 }

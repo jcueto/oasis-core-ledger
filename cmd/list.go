@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/oasisprotocol/oasis-core-ledger/internal"
+	"github.com/oasisprotocol/oasis-core-ledger/temp"
 )
 
 var listCmd = &cobra.Command{
@@ -13,5 +13,5 @@ var listCmd = &cobra.Command{
 }
 
 func doList(cmd *cobra.Command, args []string) {
-	internal.ListOasisDevices(internal.ListingDerivationPath)
+	temp.ListOasisDevices(temp.ListingDerivationPath)
 }
